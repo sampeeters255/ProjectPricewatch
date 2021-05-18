@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PricewatchModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="naam" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Merk">
+          <Key>
+            <PropertyRef Name="merkId" />
+          </Key>
+          <Property Name="merkId" Type="int" Nullable="false" />
+          <Property Name="merkNaam" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="subId" Type="int" Nullable="false" />
+          <Property Name="merkId" Type="int" Nullable="false" />
+          <Property Name="productNaam" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="schermdiagonaal" Type="float" />
+          <Property Name="besturingssysteem" Type="varchar" MaxLength="50" />
+          <Property Name="opslagcapaciteit" Type="int" />
+          <Property Name="werkgeheugen" Type="int" />
+          <Property Name="soort" Type="varchar" MaxLength="50" />
+          <Property Name="batterijduur" Type="int" />
+          <Property Name="verbinding" Type="varchar" MaxLength="50" />
+          <Property Name="zakloos" Type="varchar" MaxLength="50" />
+          <Property Name="inhoud" Type="float" />
+          <Property Name="koffiesoort" Type="varchar" MaxLength="50" />
+          <Property Name="inhoudBonen" Type="float" />
+          <Property Name="inhoudWater" Type="float" />
+          <Property Name="vermogen" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductWinkel">
+          <Key>
+            <PropertyRef Name="productWinkelId" />
+          </Key>
+          <Property Name="productWinkelId" Type="int" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="winkelId" Type="int" Nullable="false" />
+          <Property Name="prijs" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subcategorie">
+          <Key>
+            <PropertyRef Name="subId" />
+          </Key>
+          <Property Name="subId" Type="int" Nullable="false" />
+          <Property Name="categorieId" Type="int" Nullable="false" />
+          <Property Name="subcategorieNaam" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Winkel">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="naam" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Product_Merk">
+          <End Role="Merk" Type="Self.Merk" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merk">
+              <PropertyRef Name="merkId" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="merkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Subcategorie">
+          <End Role="Subcategorie" Type="Self.Subcategorie" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subcategorie">
+              <PropertyRef Name="subId" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="subId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductWinkel_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductWinkel" Type="Self.ProductWinkel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductWinkel">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductWinkel_Winkel">
+          <End Role="Winkel" Type="Self.Winkel" Multiplicity="1" />
+          <End Role="ProductWinkel" Type="Self.ProductWinkel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Winkel">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductWinkel">
+              <PropertyRef Name="winkelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subcategorie_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="Subcategorie" Type="Self.Subcategorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Subcategorie">
+              <PropertyRef Name="categorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PricewatchModelStoreContainer">
+          <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="Pricewatch" store:Type="Tables" />
+          <EntitySet Name="Merk" EntityType="Self.Merk" Schema="Pricewatch" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="Pricewatch" store:Type="Tables" />
+          <EntitySet Name="ProductWinkel" EntityType="Self.ProductWinkel" Schema="Pricewatch" store:Type="Tables" />
+          <EntitySet Name="Subcategorie" EntityType="Self.Subcategorie" Schema="Pricewatch" store:Type="Tables" />
+          <EntitySet Name="Winkel" EntityType="Self.Winkel" Schema="Pricewatch" store:Type="Tables" />
+          <AssociationSet Name="FK_Product_Merk" Association="Self.FK_Product_Merk">
+            <End Role="Merk" EntitySet="Merk" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Subcategorie" Association="Self.FK_Product_Subcategorie">
+            <End Role="Subcategorie" EntitySet="Subcategorie" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductWinkel_Product" Association="Self.FK_ProductWinkel_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductWinkel" EntitySet="ProductWinkel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductWinkel_Winkel" Association="Self.FK_ProductWinkel_Winkel">
+            <End Role="Winkel" EntitySet="Winkel" />
+            <End Role="ProductWinkel" EntitySet="ProductWinkel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subcategorie_Categorie" Association="Self.FK_Subcategorie_Categorie">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="Subcategorie" EntitySet="Subcategorie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PricewatchModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="naam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Subcategorieën" Relationship="Self.FK_Subcategorie_Categorie" FromRole="Categorie" ToRole="Subcategorie" />
+        </EntityType>
+        <EntityType Name="Merk">
+          <Key>
+            <PropertyRef Name="merkId" />
+          </Key>
+          <Property Name="merkId" Type="Int32" Nullable="false" />
+          <Property Name="merkNaam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Merk" FromRole="Merk" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="subId" Type="Int32" Nullable="false" />
+          <Property Name="merkId" Type="Int32" Nullable="false" />
+          <Property Name="productNaam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="schermdiagonaal" Type="Double" />
+          <Property Name="besturingssysteem" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="opslagcapaciteit" Type="Int32" />
+          <Property Name="werkgeheugen" Type="Int32" />
+          <Property Name="soort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="batterijduur" Type="Int32" />
+          <Property Name="verbinding" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zakloos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="inhoud" Type="Double" />
+          <Property Name="koffiesoort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="inhoudBonen" Type="Double" />
+          <Property Name="inhoudWater" Type="Double" />
+          <Property Name="vermogen" Type="Int32" />
+          <NavigationProperty Name="Merk" Relationship="Self.FK_Product_Merk" FromRole="Product" ToRole="Merk" />
+          <NavigationProperty Name="Subcategorie" Relationship="Self.FK_Product_Subcategorie" FromRole="Product" ToRole="Subcategorie" />
+          <NavigationProperty Name="ProductWinkels" Relationship="Self.FK_ProductWinkel_Product" FromRole="Product" ToRole="ProductWinkel" />
+        </EntityType>
+        <EntityType Name="ProductWinkel">
+          <Key>
+            <PropertyRef Name="productWinkelId" />
+          </Key>
+          <Property Name="productWinkelId" Type="Int32" Nullable="false" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="winkelId" Type="Int32" Nullable="false" />
+          <Property Name="prijs" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Producten" Relationship="Self.FK_ProductWinkel_Product" FromRole="ProductWinkel" ToRole="Product" />
+          <NavigationProperty Name="Winkels" Relationship="Self.FK_ProductWinkel_Winkel" FromRole="ProductWinkel" ToRole="Winkel" />
+        </EntityType>
+        <EntityType Name="Subcategorie">
+          <Key>
+            <PropertyRef Name="subId" />
+          </Key>
+          <Property Name="subId" Type="Int32" Nullable="false" />
+          <Property Name="categorieId" Type="Int32" Nullable="false" />
+          <Property Name="subcategorieNaam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Categorie" Relationship="Self.FK_Subcategorie_Categorie" FromRole="Subcategorie" ToRole="Categorie" />
+          <NavigationProperty Name="Producten" Relationship="Self.FK_Product_Subcategorie" FromRole="Subcategorie" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Winkel">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="naam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ProductWinkel" Relationship="Self.FK_ProductWinkel_Winkel" FromRole="Winkel" ToRole="ProductWinkel" />
+        </EntityType>
+        <Association Name="FK_Subcategorie_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="Subcategorie" Type="Self.Subcategorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Subcategorie">
+              <PropertyRef Name="categorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Merk">
+          <End Role="Merk" Type="Self.Merk" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merk">
+              <PropertyRef Name="merkId" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="merkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Subcategorie">
+          <End Role="Subcategorie" Type="Self.Subcategorie" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subcategorie">
+              <PropertyRef Name="subId" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="subId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductWinkel_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductWinkel" Type="Self.ProductWinkel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductWinkel">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductWinkel_Winkel">
+          <End Role="Winkel" Type="Self.Winkel" Multiplicity="1" />
+          <End Role="ProductWinkel" Type="Self.ProductWinkel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Winkel">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProductWinkel">
+              <PropertyRef Name="winkelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PricewatchEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categorie" EntityType="Self.Categorie" />
+          <EntitySet Name="Merk" EntityType="Self.Merk" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="ProductWinkel" EntityType="Self.ProductWinkel" />
+          <EntitySet Name="Subcategorie" EntityType="Self.Subcategorie" />
+          <EntitySet Name="Winkel" EntityType="Self.Winkel" />
+          <AssociationSet Name="FK_Subcategorie_Categorie" Association="Self.FK_Subcategorie_Categorie">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="Subcategorie" EntitySet="Subcategorie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Merk" Association="Self.FK_Product_Merk">
+            <End Role="Merk" EntitySet="Merk" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Subcategorie" Association="Self.FK_Product_Subcategorie">
+            <End Role="Subcategorie" EntitySet="Subcategorie" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductWinkel_Product" Association="Self.FK_ProductWinkel_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductWinkel" EntitySet="ProductWinkel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductWinkel_Winkel" Association="Self.FK_ProductWinkel_Winkel">
+            <End Role="Winkel" EntitySet="Winkel" />
+            <End Role="ProductWinkel" EntitySet="ProductWinkel" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PricewatchModelStoreContainer" CdmEntityContainer="PricewatchEntities">
+          <EntitySetMapping Name="Categorie">
+            <EntityTypeMapping TypeName="PricewatchModel.Categorie">
+              <MappingFragment StoreEntitySet="Categorie">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="naam" ColumnName="naam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Merk">
+            <EntityTypeMapping TypeName="PricewatchModel.Merk">
+              <MappingFragment StoreEntitySet="Merk">
+                <ScalarProperty Name="merkId" ColumnName="merkId" />
+                <ScalarProperty Name="merkNaam" ColumnName="merkNaam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="PricewatchModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="subId" ColumnName="subId" />
+                <ScalarProperty Name="merkId" ColumnName="merkId" />
+                <ScalarProperty Name="productNaam" ColumnName="productNaam" />
+                <ScalarProperty Name="schermdiagonaal" ColumnName="schermdiagonaal" />
+                <ScalarProperty Name="besturingssysteem" ColumnName="besturingssysteem" />
+                <ScalarProperty Name="opslagcapaciteit" ColumnName="opslagcapaciteit" />
+                <ScalarProperty Name="werkgeheugen" ColumnName="werkgeheugen" />
+                <ScalarProperty Name="soort" ColumnName="soort" />
+                <ScalarProperty Name="batterijduur" ColumnName="batterijduur" />
+                <ScalarProperty Name="verbinding" ColumnName="verbinding" />
+                <ScalarProperty Name="zakloos" ColumnName="zakloos" />
+                <ScalarProperty Name="inhoud" ColumnName="inhoud" />
+                <ScalarProperty Name="koffiesoort" ColumnName="koffiesoort" />
+                <ScalarProperty Name="inhoudBonen" ColumnName="inhoudBonen" />
+                <ScalarProperty Name="inhoudWater" ColumnName="inhoudWater" />
+                <ScalarProperty Name="vermogen" ColumnName="vermogen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductWinkel">
+            <EntityTypeMapping TypeName="PricewatchModel.ProductWinkel">
+              <MappingFragment StoreEntitySet="ProductWinkel">
+                <ScalarProperty Name="productWinkelId" ColumnName="productWinkelId" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="winkelId" ColumnName="winkelId" />
+                <ScalarProperty Name="prijs" ColumnName="prijs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subcategorie">
+            <EntityTypeMapping TypeName="PricewatchModel.Subcategorie">
+              <MappingFragment StoreEntitySet="Subcategorie">
+                <ScalarProperty Name="subId" ColumnName="subId" />
+                <ScalarProperty Name="categorieId" ColumnName="categorieId" />
+                <ScalarProperty Name="subcategorieNaam" ColumnName="subcategorieNaam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Winkel">
+            <EntityTypeMapping TypeName="PricewatchModel.Winkel">
+              <MappingFragment StoreEntitySet="Winkel">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="naam" ColumnName="naam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
