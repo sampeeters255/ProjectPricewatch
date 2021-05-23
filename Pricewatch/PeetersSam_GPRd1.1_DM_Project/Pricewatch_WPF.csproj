@@ -129,6 +129,10 @@
       <Project>{be846a85-03e0-4c53-9c39-b5b3678df477}</Project>
       <Name>Pricewatch_DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Pricewatch_Models\Pricewatch_Models.csproj">
+      <Project>{1397a934-2f34-459b-b770-959b9abe994e}</Project>
+      <Name>Pricewatch_Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

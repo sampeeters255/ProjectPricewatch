@@ -97,5 +97,53 @@ namespace Pricewatch_DAL
                 return query.ToList();
             }
         }
+        public static int ToevoegenProductWinkel(ProductWinkel productWinkel)
+        {
+            try
+            {
+                using (PricewatchEntities entities = new PricewatchEntities())
+                {
+                    entities.ProductWinkel.Add(productWinkel);
+                    return entities.SaveChanges();
+                }
+            }
+            catch ( Exception ex)
+            {
+                FileOperations.Foutloggen(ex);
+                return 0;
+            }
+        }
+        public static int VerwijderenProductWinkel(ProductWinkel productWinkel)
+        {
+            try
+            {
+                using (PricewatchEntities entities = new PricewatchEntities())
+                {
+                    entities.Entry(productWinkel).State = EntityState.Deleted;
+                    return entities.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.Foutloggen(ex);
+                return 0;
+            }
+        }
+        public static int AanpassenProductWinkel(ProductWinkel productWinkel)
+        {
+            try
+            {
+                using (PricewatchEntities entities = new PricewatchEntities())
+                {
+                    entities.Entry(productWinkel).State = EntityState.Modified;
+                    return entities.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.Foutloggen(ex);
+                return 0;
+            }
+        }
     }
 }

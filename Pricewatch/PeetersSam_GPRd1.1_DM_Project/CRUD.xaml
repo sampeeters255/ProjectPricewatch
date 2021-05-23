@@ -27,7 +27,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>            
         </Grid.ColumnDefinitions>
-        <ComboBox Name="cmbProduct" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5" SelectionChanged="cmbWinkel_SelectionChanged" />
+        <ComboBox Name="cmbProduct" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5" SelectionChanged="cmbProduct_SelectionChanged"  />
         <DataGrid x:Name="datagridPrijzen" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="datagridPrijzen_SelectionChanged" >
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding prijs}" Header="prijs" />
@@ -38,9 +38,9 @@
         <TextBox x:Name="txtPrijs" Grid.Row="2" Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Prijs" />
         <TextBox x:Name="txtWinkel" Grid.Row="2" Grid.Column="2" Margin="5" materialDesign:HintAssist.Hint="WinkelId" />
         <Button x:Name="btnToevoegen" Content="Toevoegen" Margin="5" Grid.Row="3" Grid.Column="0" Click="btnToevoegen_Click" />
-        <Button x:Name="btnAanpassen" Content="Aanpassen" Margin="5" Grid.Row="3" Grid.Column="1" />
-        <Button x:Name="btnVerwijderen" Content="Verwijderen" Margin="5" Grid.Row="3" Grid.Column="2" />
-        <Button x:Name="btnAnnuleren" Content="Annuleren" Margin="5" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"/>
+        <Button x:Name="btnAanpassen" Content="Aanpassen" Margin="5" Grid.Row="3" Grid.Column="1" Click="btnAanpassen_Click" />
+        <Button x:Name="btnVerwijderen" Content="Verwijderen" Margin="5" Grid.Row="3" Grid.Column="2" Click="btnVerwijderen_Click" />
+        <Button x:Name="btnAnnuleren" Content="Annuleren" Margin="5" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Click="btnAnnuleren_Click"/>
 
     </Grid>
 </Window>
