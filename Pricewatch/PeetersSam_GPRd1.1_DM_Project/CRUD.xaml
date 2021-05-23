@@ -1,0 +1,46 @@
+﻿<Window x:Class="PeetersSam_GPRd1._1_DM_Project.CRUD"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PeetersSam_GPRd1._1_DM_Project"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="CRUD" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>            
+        </Grid.ColumnDefinitions>
+        <ComboBox Name="cmbProduct" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5" SelectionChanged="cmbWinkel_SelectionChanged" />
+        <DataGrid x:Name="datagridPrijzen" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="datagridPrijzen_SelectionChanged" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding prijs}" Header="prijs" />
+                <DataGridTextColumn Binding="{Binding Winkels}" Header="winkel"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="txtProductWinkelId" Grid.Row="2" Grid.Column="0" Margin="5" materialDesign:HintAssist.Hint="id" />
+        <TextBox x:Name="txtPrijs" Grid.Row="2" Grid.Column="1" Margin="5" materialDesign:HintAssist.Hint="Prijs" />
+        <TextBox x:Name="txtWinkel" Grid.Row="2" Grid.Column="2" Margin="5" materialDesign:HintAssist.Hint="WinkelId" />
+        <Button x:Name="btnToevoegen" Content="Toevoegen" Margin="5" Grid.Row="3" Grid.Column="0" Click="btnToevoegen_Click" />
+        <Button x:Name="btnAanpassen" Content="Aanpassen" Margin="5" Grid.Row="3" Grid.Column="1" />
+        <Button x:Name="btnVerwijderen" Content="Verwijderen" Margin="5" Grid.Row="3" Grid.Column="2" />
+        <Button x:Name="btnAnnuleren" Content="Annuleren" Margin="5" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+    </Grid>
+</Window>

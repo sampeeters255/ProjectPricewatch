@@ -9,8 +9,8 @@ namespace Pricewatch_DAL
 {
     public static class DatabaseOperations
     {
-        
-       public static List<Categorie> CategorieOphalen()
+
+        public static List<Categorie> CategorieOphalen()
         {
             using (PricewatchEntities entities = new PricewatchEntities())
             {
@@ -20,7 +20,7 @@ namespace Pricewatch_DAL
         }
         public static List<Subcategorie> SubcategorieOphalen(int categorieId)
         {
-            using(PricewatchEntities entities = new PricewatchEntities())
+            using (PricewatchEntities entities = new PricewatchEntities())
             {
                 var query = entities.Subcategorie
                     .Where(x => x.Categorie.id == categorieId);
@@ -35,7 +35,7 @@ namespace Pricewatch_DAL
             using (PricewatchEntities entities = new PricewatchEntities())
             {
                 var query = entities.Product
-                    .Include(x=>x.Merk)
+                    .Include(x => x.Merk)
                     .Where(x => x.schermdiagonaal > min && x.schermdiagonaal < max);
                 return query.ToList();
 
@@ -46,15 +46,15 @@ namespace Pricewatch_DAL
             using (PricewatchEntities entities = new PricewatchEntities())
             {
                 var query = entities.Product
-                    .Include(x=>x.Merk)                    
+                    .Include(x => x.Merk)
                     .Where(x => x.subId.Equals(productId));
                 return query.ToList();
 
             }
         }
-        
-        
-        
+
+
+
         public static List<ProductWinkel> GetWinkels(int winkelNr)
         {
             using (PricewatchEntities entities = new PricewatchEntities())
@@ -72,9 +72,30 @@ namespace Pricewatch_DAL
             {
                 var query = entities.Product
                     .Include(x => x.Merk)
-                    .Where(x=>x.Merk.merkNaam.Contains(merk));
+                    .Where(x => x.Merk.merkNaam.Contains(merk));
+                return query.ToList();
+            }
+        }
+
+
+        public static List<Product> HaalAlleProductenOp()
+        {
+            using (PricewatchEntities entities = new PricewatchEntities())
+            {
+                var query = entities.Product;
+                return query.ToList();
+
+            }
+        }
+        public static List<ProductWinkel> HaalPrijzenProduct(int productNr)
+        {
+            using (PricewatchEntities entities = new PricewatchEntities())
+            {
+                var query = entities.ProductWinkel
+                    .Include(x => x.Winkels)
+                    .Where(x => x.productId == productNr);
                 return query.ToList();
             }
         }
     }
-    }
+}

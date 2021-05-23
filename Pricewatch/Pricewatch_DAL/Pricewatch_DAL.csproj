@@ -61,6 +61,8 @@
     <Compile Include="Merk.cs">
       <DependentUpon>PricewatchModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Partials\ProductWinkel.cs" />
+    <Compile Include="Partials\Winkel.cs" />
     <Compile Include="PricewatchModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

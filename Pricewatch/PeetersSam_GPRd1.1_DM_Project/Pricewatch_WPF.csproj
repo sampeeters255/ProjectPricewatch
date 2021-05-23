@@ -75,6 +75,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="CRUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Navigatie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -85,6 +89,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CRUD.xaml.cs">
+      <DependentUpon>CRUD.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Navigatie.xaml.cs">
       <DependentUpon>Navigatie.xaml</DependentUpon>
     </Compile>

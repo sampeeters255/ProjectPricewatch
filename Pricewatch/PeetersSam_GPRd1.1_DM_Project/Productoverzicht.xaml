@@ -67,6 +67,6 @@
         <ComboBox x:Name="cmbCategorie" Grid.Column="0" Grid.Row="1" Margin="5" SelectionChanged="cmbCategorie_SelectionChanged" />
         <ComboBox x:Name="cmbSubcat" Grid.Column="1" Grid.Row="1" SelectionChanged="cmbSubcat_SelectionChanged" />
         <Button x:Name="btnPrijslijst" Content="Prijslijsten" Grid.Column="3" Grid.Row="1" Margin="5" Click="btnPrijslijst_Click"/>
-        <Button x:Name="btnCud" Content="CUD Operaties" Grid.Column="2" Grid.Row="1" Margin="5"/>
+        <Button x:Name="btnCud" Content="CUD Operaties" Grid.Column="2" Grid.Row="1" Margin="5" Click="btnCud_Click"/>
     </Grid>
 </Window>

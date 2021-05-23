@@ -119,6 +119,12 @@ namespace PeetersSam_GPRd1._1_DM_Project
             datagridProducten.ItemsSource =
             DatabaseOperations.ZoekenOpMerk(txtMerk.Text);
         }
+
+        private void btnCud_Click(object sender, RoutedEventArgs e)
+        {
+            CRUD crud = new CRUD();
+            crud.Show();
+        }
     }
 }
 
