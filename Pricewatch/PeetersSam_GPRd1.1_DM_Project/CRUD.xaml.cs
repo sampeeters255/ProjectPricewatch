@@ -136,8 +136,12 @@ namespace PeetersSam_GPRd1._1_DM_Project
                 }
                 else
                 {
-                    MessageBox.Show(foutmeldingen);
+                    MessageBox.Show(productWinkel.Error);
                 }
+            }
+            else
+            {
+                MessageBox.Show(foutmeldingen);
             }
         }
 
