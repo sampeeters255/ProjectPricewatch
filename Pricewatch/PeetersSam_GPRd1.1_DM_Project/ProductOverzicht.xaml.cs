@@ -27,8 +27,15 @@ namespace PeetersSam_GPRd1._1_DM_Project
         
         private void btnScherm_Click(object sender, RoutedEventArgs e)
         {
-            datagridProducten.ItemsSource =
-            DatabaseOperations.OphalenViaSchermdiagonaal(double.Parse(txtMin.Text), double.Parse(txtMax.Text));
+            if (double.TryParse(txtMin.Text, out double min) && double.TryParse(txtMax.Text, out double max))
+            {
+                datagridProducten.ItemsSource =
+            DatabaseOperations.OphalenViaSchermdiagonaal(min, max);
+            }
+            else
+            {
+                MessageBox.Show("Min en max moeten numerieke waarden zijn");
+            }
 
         }
        

@@ -29,7 +29,7 @@ namespace PeetersSam_GPRd1._1_DM_Project
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             cmbProduct.ItemsSource = DatabaseOperations.HaalAlleProductenOp();
-            cmbProduct.DisplayMemberPath = "productNaam";
+            cmbWinkels.ItemsSource = DatabaseOperations.HaalWinkels();
         }
 
         private void cmbProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -46,16 +46,17 @@ namespace PeetersSam_GPRd1._1_DM_Project
             string foutmeldingen = Valideer("ProductId");             
             foutmeldingen += Valideer("ProductWinkelId");
             foutmeldingen += Valideer("Prijs");
-            foutmeldingen += Valideer("WinkelId");
+            foutmeldingen += Valideer("winkelId");
 
             if (string.IsNullOrWhiteSpace(foutmeldingen))
             {
+                Winkel winkel = cmbWinkels.SelectedItem as Winkel;
                 Product product = cmbProduct.SelectedItem as Product;
                 ProductWinkel productwinkel = new ProductWinkel();
                 productwinkel.productWinkelId = int.Parse(txtProductWinkelId.Text);
                 productwinkel.prijs = double.Parse(txtPrijs.Text);
-                productwinkel.productId = product.id;
-                productwinkel.winkelId = int.Parse(txtWinkel.Text);
+                productwinkel.productId = product.id;                
+                productwinkel.winkelId = winkel.id;
 
                 if (productwinkel.IsGeldig())
                 {
@@ -64,6 +65,11 @@ namespace PeetersSam_GPRd1._1_DM_Project
                     if (ok > 0)
                     {
                         datagridPrijzen.ItemsSource = DatabaseOperations.HaalPrijzenProduct(product.id);
+                        Resetten();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Product is niet toegevoegd aan winkel");
                         Resetten();
                     }
                 }
@@ -105,7 +111,7 @@ namespace PeetersSam_GPRd1._1_DM_Project
         private void btnAanpassen_Click(object sender, RoutedEventArgs e)
         {
             string foutmeldingen = Valideer("ProductWinkel");
-            foutmeldingen += Valideer("Winkel");
+            foutmeldingen += Valideer("winkelId");
             foutmeldingen += Valideer("Prijs");
             foutmeldingen += Valideer("ProductId");
 
@@ -113,7 +119,7 @@ namespace PeetersSam_GPRd1._1_DM_Project
             {
                 ProductWinkel productWinkel = datagridPrijzen.SelectedItem as ProductWinkel;
                 productWinkel.prijs = double.Parse(txtPrijs.Text);
-                productWinkel.winkelId = int.Parse(txtWinkel.Text);
+                
 
                 if (productWinkel.IsGeldig())
                 {
@@ -138,12 +144,12 @@ namespace PeetersSam_GPRd1._1_DM_Project
         private void datagridPrijzen_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (datagridPrijzen.SelectedItem is ProductWinkel productwinkel)
-            {
+            {               
                 txtPrijs.Text = productwinkel.prijs.ToString();
-                txtProductWinkelId.Text = productwinkel.productWinkelId.ToString();
-                txtWinkel.Text = productwinkel.winkelId.ToString();
-                txtProductWinkelId.IsEnabled = false;
+                txtProductWinkelId.Text = productwinkel.productWinkelId.ToString();                                
+                txtProductWinkelId.IsEnabled = false;                
                 btnToevoegen.IsEnabled = false;
+                cmbWinkels.SelectedItem = productwinkel.Winkels;
 
             }
         }
@@ -165,20 +171,20 @@ namespace PeetersSam_GPRd1._1_DM_Project
             {
                 return "Prijs moet een numerieke waarde zijn" + Environment.NewLine;
             }
-            if (columnName == "WinkelId" && !int.TryParse(txtWinkel.Text, out int winkelId))
+            if (columnName == "winkelId" && cmbWinkels.SelectedItem == null)
             {
-                return "WinkelId moet een numerieke waarde zijn";
+                return "Selecteer een winkel!";
             }
             return "";
         }
         private void Resetten()
         {
             txtPrijs.Text = "";
-            txtProductWinkelId.Text = "";
-            txtWinkel.Text = "";
-            btnToevoegen.IsEnabled = true;
-            txtProductWinkelId.IsEnabled = true;
+            txtProductWinkelId.Text = "";            
+            btnToevoegen.IsEnabled = true;            
+            txtProductWinkelId.IsEnabled = true;            
             datagridPrijzen.SelectedItem = null;
+            cmbWinkels.SelectedIndex = -1;
 
         }
 

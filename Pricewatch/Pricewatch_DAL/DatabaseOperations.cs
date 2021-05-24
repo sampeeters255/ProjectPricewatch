@@ -82,9 +82,18 @@ namespace Pricewatch_DAL
         {
             using (PricewatchEntities entities = new PricewatchEntities())
             {
-                var query = entities.Product;
+                var query = entities.Product
+                    .Include(x=>x.Merk);
                 return query.ToList();
 
+            }
+        }
+        public static List<Winkel> HaalWinkels()
+        {
+            using (PricewatchEntities entities = new PricewatchEntities())
+            {
+                var query = entities.Winkel;
+                return query.ToList();
             }
         }
         public static List<ProductWinkel> HaalPrijzenProduct(int productNr)
