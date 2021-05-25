@@ -49,21 +49,8 @@ namespace PeetersSam_GPRd1._1_DM_Project
         private void cmbCategorie_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Categorie categorie = cmbCategorie.SelectedItem as Categorie;
-            if (categorie.id==1)
-            {          
-                cmbSubcat.ItemsSource = DatabaseOperations.SubcategorieOphalen(1);
-                cmbSubcat.DisplayMemberPath = "subcategorieNaam";
-            }
-            else if (categorie.id==2)
-            {
-                cmbSubcat.ItemsSource = DatabaseOperations.SubcategorieOphalen(2);
-                cmbSubcat.DisplayMemberPath = "subcategorieNaam";
-            }
-            else if (categorie.id==3)
-            {                
-                cmbSubcat.ItemsSource = DatabaseOperations.SubcategorieOphalen(3);
-                cmbSubcat.DisplayMemberPath = "subcategorieNaam";
-            }
+            cmbSubcat.ItemsSource = DatabaseOperations.SubcategorieOphalen(categorie.id);
+            cmbSubcat.DisplayMemberPath = "subcategorieNaam";           
             
         }
 
@@ -77,41 +64,9 @@ namespace PeetersSam_GPRd1._1_DM_Project
             }
             else
             {
-                switch (subcategorie.subId)
-                {
-                    case 1:
-                        datagridProducten.ItemsSource = DatabaseOperations.ProductOphalen(1);
-                        break;
-                    case 2:
-                        datagridProducten.ItemsSource = DatabaseOperations.ProductOphalen(2);
-                        break;
-                    case 3:
-                        datagridProducten.ItemsSource = DatabaseOperations.ProductOphalen(3);
-                        break;
-                    case 4:
-                        datagridProducten.ItemsSource = DatabaseOperations.ProductOphalen(4);
-                        break;
-                    case 5:
-                        datagridProducten.ItemsSource = DatabaseOperations.ProductOphalen(5);
-                        break;
-                    case 6:
-                        datagridProducten.ItemsSource = DatabaseOperations.ProductOphalen(6);
-                        break;
-                    case 7:
-                        datagridProducten.ItemsSource = DatabaseOperations.ProductOphalen(7);
-                        break;
-                    case 8:
-                        datagridProducten.ItemsSource = DatabaseOperations.ProductOphalen(8);
-                        break;
-                    case 9:
-                        datagridProducten.ItemsSource = DatabaseOperations.ProductOphalen(9);
-                        break;
+                datagridProducten.ItemsSource = DatabaseOperations.ProductOphalenViaSubCategorie(subcategorie.subId);              
 
-                    default:
-                        break;
 
-                }
-            
             }
         }
 

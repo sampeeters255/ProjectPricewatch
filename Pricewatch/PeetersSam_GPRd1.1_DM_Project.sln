@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pricewatch_Models", "Pricew
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pricewatch_DAL", "Pricewatch_DAL\Pricewatch_DAL.csproj", "{BE846A85-03E0-4C53-9C39-B5B3678DF477}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pricewatch_UnitTest", "Pricewatch_UnitTest\Pricewatch_UnitTest.csproj", "{6160FE4A-ED5D-4EFF-9893-89C9CF056421}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BE846A85-03E0-4C53-9C39-B5B3678DF477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE846A85-03E0-4C53-9C39-B5B3678DF477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE846A85-03E0-4C53-9C39-B5B3678DF477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6160FE4A-ED5D-4EFF-9893-89C9CF056421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6160FE4A-ED5D-4EFF-9893-89C9CF056421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6160FE4A-ED5D-4EFF-9893-89C9CF056421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6160FE4A-ED5D-4EFF-9893-89C9CF056421}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -41,13 +41,13 @@ namespace Pricewatch_DAL
 
             }
         }
-        public static List<Product> ProductOphalen(int productId)
+        public static List<Product> ProductOphalenViaSubCategorie(int subId)
         {
             using (PricewatchEntities entities = new PricewatchEntities())
             {
                 var query = entities.Product
                     .Include(x => x.Merk)
-                    .Where(x => x.subId.Equals(productId));
+                    .Where(x => x.subId.Equals(subId));
                 return query.ToList();
 
             }
